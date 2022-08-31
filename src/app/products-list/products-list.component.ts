@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../login/auth.service';
+import { ProductsService } from './products.service';
+import { Products } from './products';
 
 @Component({
   selector: 'app-products-list',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsListComponent implements OnInit {
 
-  constructor() { }
+  showMenu: boolean = false;
 
-  ngOnInit(): void {
+  products?: Products[];
+  
+  constructor(
+    private authService: AuthService,
+    private service: ProductsService
+    ) { }
+
+
+  ngOnInit(){
+    this.authService.showMenuEmitter.subscribe(
+      show => this.showMenu = show
+    );
+
+    this.service.list()
+    .subscribe(dados => this.service = dados);
   }
 
 }
