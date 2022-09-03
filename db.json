@@ -1,0 +1,20 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Notebook",
+      "brand": "Acer",
+      "price": 5000,
+      "inStorage": 5,
+      "minStorage": 1
+    },
+    {
+      "name": "Monitor",
+      "brand": "Samsung",
+      "price": 2000,
+      "inStorage": 7,
+      "minStorage": 1,
+      "id": 2
+    }
+  ]
+}

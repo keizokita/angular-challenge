@@ -1,3 +1,4 @@
+import { ProductsListModule } from './products-list/products-list.module';
 import { AuthGuard } from './guards/auth.guard';
 import { RouterModule } from '@angular/router';
 import { AuthService } from './login/auth.service';
@@ -14,14 +15,14 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     LoginComponent,
-    
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    ProductsListModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

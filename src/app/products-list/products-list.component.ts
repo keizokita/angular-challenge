@@ -12,7 +12,7 @@ export class ProductsListComponent implements OnInit {
 
   showMenu: boolean = false;
 
-  products?: Products[];
+  products!: Products[];
   
   constructor(
     private authService: AuthService,
@@ -26,7 +26,7 @@ export class ProductsListComponent implements OnInit {
     );
 
     this.service.list()
-    .subscribe(dados => this.service = dados);
+    .subscribe(dados => this.products = dados);
   }
 
 }

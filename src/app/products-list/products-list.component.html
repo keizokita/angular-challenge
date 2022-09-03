@@ -4,18 +4,18 @@
         <h4>Lista de Produtos</h4>
       </div>
       <div class="float-end">
-        <button type="button" class="btn btn-danger">
+        <button type="button" class="btn btn-danger" [routerLink]="['']">
           Logout
         </button>
       </div>
       <div class="float-none">
-        <button type="button" class="btn btn-primary">
+        <a type="button" class="btn btn-primary" [routerLink]="['/products-list/new']">
           Cadastrar Produto
-        </button>
+        </a>
       </div>
     </div>
     <div class="card-body">
-      <table class="table table-hover">
+      <table class="table table-hover" >
         <thead>
           <tr>
             <th scope="col">Produto</th>
@@ -73,7 +73,3 @@
       <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
     </div>
   </ng-template> -->
-
-<!-- <div class="container">
-  <router-outlet></router-outlet>
-</div> -->
