@@ -1,3 +1,4 @@
+import { Products } from '../products-list/products';
 import { Users } from './users';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -10,8 +11,10 @@ export class AuthService {
   private userAuthenticated: boolean = false;
 
   showMenuEmitter = new EventEmitter<boolean>();
+  delProduct: any;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router) { }
 
   doLogin(users: Users) {
     if (users.email === 'usuario@email.com' && users.password === '123456') 
@@ -40,7 +43,4 @@ export class AuthService {
   userIsAuthenticated(){
     return this.userAuthenticated;
   }
-
-
-  
 }

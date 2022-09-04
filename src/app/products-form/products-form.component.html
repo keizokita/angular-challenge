@@ -1,35 +1,48 @@
-<form class="row g-3 needs-validation" novalidate [formGroup]="form">
+<form class="row g-3 needs-validation" novalidate [formGroup]="formValue">
   <div class="col-md-12">
     <label for="name" class="form-label">Produto</label>
-    <input type="text" class="form-control" id="name" formControlName="name" />
-    <label for="name" class="form-label">Marca do Produto</label>
-    <input type="text" class="form-control" id="brand" formControlName="name" />
-    <label for="price" class="form-label">Preço do Produto</label>
+    <input 
+    type="text" 
+    class="form-control" 
+    id="name" 
+    formControlName="name" 
+    required
+    />
+    <label for="brand" class="form-label">Marca do Produto</label>
     <input
+      type="text"
+      class="form-control"
+      id="brand"
+      formControlName="brand"
+      required
+    />
+    <label for="price" class="form-label">Preço do Produto</label>
+    R$<input
       type="number"
       class="form-control"
       id="price"
-      formControlName="name"
+      formControlName="price"
+      required
     />
-    <label for="name" class="form-label">Em estoque</label>
+    <label for="inStorage" class="form-label">Em estoque</label>
     <input
       type="number"
       class="form-control"
       id="inStorage"
-      formControlName="name"
+      formControlName="inStorage"
+      required
     />
-    <label for="name" class="form-label">Quantidade minima em estoque</label>
+    <label for="minStorage" class="form-label">Quantidade minima em estoque</label>
     <input
       type="number"
       class="form-control"
       id="minStorage"
-      formControlName="name"
-      [ngClass]="{ 'is-invalid' : submitted && form.get('minStorage') }"
+      formControlName="minStorage"
+      required
     />
-    <div class="valid-feedback">Looks good!</div>
     <br />
     <div>
-      <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()" >
         Salvar
       </button>
     </div>
