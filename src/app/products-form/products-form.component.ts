@@ -26,7 +26,6 @@ export class ProductsFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
     // this.route.params
     //   .pipe(
     //     map((params: any) => params['id']),
@@ -71,25 +70,27 @@ export class ProductsFormComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  onSubmit() {
     this.submitted = true;
-    console.log(this.formValue?.value);
-    if (this.formValue?.valid) {
+    console.log(this.formValue.value);
+    if (this.formValue.valid) {
       console.log('submit');
+      this.service.save(this.formValue.value);
+      this.location.back();
 
-        this.service.save(this.formValue.value).subscribe(() => {
-          this.location.back();
-      });
       if (this.formValue.value.id) {
         // update
-        this.service.update(this.formValue.value).subscribe(() => {
-          this.location.back();
-        });
-      } else {
-        this.service.create(this.formValue.value).subscribe(() => {
-          this.location.back();
-        });
+        // this.service.save(this.formValue.value).subscribe(() => {
+        //   this.location.back();
+        // });
       }
     }
+
+      // } else {
+      //   this.service.create(this.formValue.value).subscribe(() => {
+      //     this.location.back();
+      //   });
+      //}
+      
   }
 }

@@ -1,14 +1,6 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Notebook",
-      "brand": "Acer",
-      "price": 5000,
-      "inStorage": 5,
-      "minStorage": 1
-    },
-    {
       "name": "Notebook",
       "brand": "Positivo",
       "price": 6000,
@@ -17,19 +9,19 @@
       "id": 2
     },
     {
-      "name": "Monitor",
+      "name": "Notebook",
       "brand": "Acer",
-      "price": 2000,
-      "inStorage": 20,
+      "price": 524332,
+      "inStorage": 1,
       "minStorage": 1,
       "id": 3
     },
     {
-      "name": "Monitor",
-      "brand": "Acer",
-      "price": 2000,
-      "inStorage": 20,
-      "minStorage": 1,
+      "name": "Teclado",
+      "brand": "Logitech",
+      "price": 544,
+      "inStorage": 3,
+      "minStorage": 24,
       "id": 4
     }
   ]

@@ -30,7 +30,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of product" [class.table-danger]="product.inStorage == 0">
+        <tr
+          *ngFor="let product of product"
+          [class.table-danger]="product.inStorage == 0"
+        >
           <td>{{ product.name }}</td>
           <td>{{ product.brand }}</td>
           <td>{{ product.price }}</td>
@@ -38,15 +41,27 @@
           <td>{{ product.minStorage }}</td>
           <td>
             <span class="float-end">
-              <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(product.id)">
+              <button
+                class="btn btn-outline-warning mb-1 btn-sm"
+                (click)="onEdit(product.id)"
+              >
                 Editar
               </button>
               {{ " " }}
-              <button class="btn btn-outline-success mb-1 btn-sm" (click)="onVenda()">
+              <button
+                class="btn btn-outline-success mb-1 btn-sm"
+                (click)="onVenda()"
+              >
                 Vender
               </button>
               {{ " " }}
-              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="delProduct(product)">
+              <button
+                class="btn btn-outline-danger mb-1 btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                (click)="onDelete(product)"
+                (click)="showModal()"
+              >
                 Remover
               </button>
             </span>
@@ -56,3 +71,47 @@
     </table>
   </div>
 </div>
+
+<ng-template id="deleteModal">
+  <div
+    class="modal fade"
+    id="deleteModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Atenção!</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">Deseja realmente excluir esse produto?</div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-primary">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<script>
+  function showModal(){
+    const deleteModal= document.getElementById("deleteModal");
+    const myModal = new bootstrap.Modal(deleteModal);
+    
+    deleteModal.show();
+  }
+</script>

@@ -21,15 +21,21 @@ export class ProductsService {
   }
 
   loadByID(id: any) {
-    return this.http.get<Products>(`&{this.API}/${id}`).pipe(take(1));
+    return this.http.get<Products>(`${this.API}/${id}`).subscribe(
+      a => console.log(a)
+      );
   }
 
-  create(product: any) {
-    return this.http.post(this.API, product).pipe(take(1));
+  private create(product: any) {
+    return this.http.post(this.API, product).subscribe(
+      a => console.log(a)
+      );
   }
 
-  update(product: any) {
-    return this.http.put(`&{this.API}/${product.id}`, product).pipe(take(1));
+  private update(product: any) {
+    return this.http.put(`${this.API}/${product.id}`, product).subscribe(
+      b => console.log(b)
+    );
   }
 
   save(product: any) {
@@ -37,6 +43,13 @@ export class ProductsService {
       return this.update(product);
     }
     return this.create(product);
+  }
+
+  remove(id: number) {
+    console.log(id);
+    return this.http.delete(`${this.API}/${id}`).subscribe(
+    a => console.log(a)
+    );
   }
 }
 

@@ -19,7 +19,7 @@ export class ProductsResolverGuard implements Resolve<Products> {
     state: RouterStateSnapshot
   ): Observable<any> {
     if (route.params && route.params['id']) {
-      return this.service.loadByID(route.params['id']);
+      // return this.service.loadByID(route.params['id']);
     }
 
     return of({
