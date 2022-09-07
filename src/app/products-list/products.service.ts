@@ -1,18 +1,22 @@
 import { Products } from './products';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
+  formValue!: FormGroup;
+  postProducts(productsList: Products) {
+    throw new Error('Method not implemented.');
+  }
   delProduct(id: any) {
     throw new Error('Method not implemented.');
   }
 
   private readonly API = 'http://localhost:3000/products';
-  postProducts: any;
 
   constructor(private http: HttpClient) { } 
 
@@ -20,36 +24,54 @@ export class ProductsService {
     return this.http.get<Products[]>(this.API);
   }
 
-  loadByID(id: any) {
-    return this.http.get<Products>(`${this.API}/${id}`).subscribe(
-      a => console.log(a)
-      );
+  loadByID(id: any) : Observable<Products[]> {
+    return this.http.get<Products[]>(`${this.API}/${id}`);
   }
 
-  private create(product: any) {
+  create(product: any) {
     return this.http.post(this.API, product).subscribe(
       a => console.log(a)
       );
   }
 
-  private update(product: any) {
+  update(product: any) {
     return this.http.put(`${this.API}/${product.id}`, product).subscribe(
-      b => console.log(b)
+      () => {
+        
+        this.formValue.reset();
+      }
+      
     );
   }
 
   save(product: any) {
-    if (product.id) {
+    if (product.id == '') {
+      return this.create(product);
+    } else {
       return this.update(product);
     }
-    return this.create(product);
   }
 
   remove(id: number) {
     console.log(id);
-    return this.http.delete(`${this.API}/${id}`).subscribe(
-    a => console.log(a)
+    this.http.delete(`${this.API}/${id}`).subscribe(res => {
+      console.log(res)
+      this.updateForm
+    }
+    
+   
     );
+  }
+
+  updateForm(product: any){
+    this.formValue.patchValue({
+      id: product.id,
+      name: product.name,
+      brand: product.brand,
+      price: product.price,
+      inStrorage: product.inStorage,
+      minStrorage: product.minStorage
+    });
   }
 }
 

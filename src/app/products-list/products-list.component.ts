@@ -3,7 +3,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../login/auth.service';
 import { ProductsService } from './products.service';
 import { Products } from './products';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-products-list',
@@ -21,21 +23,49 @@ export class ProductsListComponent implements OnInit {
 
   productSelected!: Products;
 
-  showModal: any;
+  // showModal: any;
 
-  deleteModalRef: any;
+  // deleteModalRef: any;
 
   @ViewChild('deleteModal') deleteModal: any;
   modalService: any;
+  updateForm: any;
 
   constructor(
     private authService: AuthService,
     private service: ProductsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private fb:FormBuilder
   ) {}
 
   ngOnInit() {
+    this.formValue = this.fb.group({
+      name:  ['',[Validators.required]],
+      brand: ['',[Validators.required]],
+      price: ['',[Validators.required]],
+      inStorage: ['',[Validators.required]],
+      minStorage: ['',[Validators.required]],
+    });
+    // const id = this.formValue.get('product.id')?.value;
+
+    // if (id != null){
+    //   this.service.update
+    // }
+
+    // populaProducts(id) {
+    //   this.formValue.patchValue({
+    //     product: {
+    //       name: null,
+    //       brand: null,
+    //       price: null,
+    //       inStorage: null,
+    //       minStorage: null
+    //     }
+    //   })
+    // }
+  
     this.authService.showMenuEmitter.subscribe(
       (show) => (this.showMenu = show)
     );
@@ -52,6 +82,7 @@ export class ProductsListComponent implements OnInit {
     this.productSelected = product;
     // this.deleteModalRef = this.modalService.show(this.deleteModal, { class: 'modal-sm'});
     this.service.remove(this.productSelected.id);
+    this.updateForm(product);
   }
 
   // onConfirmDelete() {
@@ -78,4 +109,16 @@ export class ProductsListComponent implements OnInit {
       this.formValue.reset();
     }
   }
+
+  // resetProducts(formValue: any){
+  //   formValue.product.patchValue({
+  //     product: {
+  //       name: null,
+  //       brand: null,
+  //       price: null,
+  //       inStorage: null,
+  //       minStorage: null
+  //     }
+  //   });
+  // }
 }

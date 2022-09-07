@@ -7,22 +7,6 @@
       "inStorage": 0,
       "minStorage": 1,
       "id": 2
-    },
-    {
-      "name": "Notebook",
-      "brand": "Acer",
-      "price": 524332,
-      "inStorage": 1,
-      "minStorage": 1,
-      "id": 3
-    },
-    {
-      "name": "Teclado",
-      "brand": "Logitech",
-      "price": 544,
-      "inStorage": 3,
-      "minStorage": 24,
-      "id": 4
     }
   ]
 }
