@@ -26,13 +26,13 @@ export class ProductsService {
       );
   }
 
-  private create(product: any) {
+  create(product: any) {
     return this.http.post(this.API, product).subscribe(
       a => console.log(a)
       );
   }
 
-  private update(product: any) {
+  update(product: any) {
     return this.http.put(`${this.API}/${product.id}`, product).subscribe(
       b => console.log(b)
     );

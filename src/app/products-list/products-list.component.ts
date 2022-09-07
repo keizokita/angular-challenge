@@ -50,8 +50,9 @@ export class ProductsListComponent implements OnInit {
   onDelete(product: any) {
     console.log('sucesso');
     this.productSelected = product;
-    // this.deleteModalRef = this.modalService.show(this.deleteModal, { class: 'modal-sm'});
+    //this.deleteModalRef = this.modalService.show(this.deleteModal, { class: '.modal-sm'});
     this.service.remove(this.productSelected.id);
+    this.service.list().subscribe((dados) => (this.product = dados));
   }
 
   // onConfirmDelete() {

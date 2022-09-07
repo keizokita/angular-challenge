@@ -23,6 +23,78 @@
       "inStorage": 3,
       "minStorage": 24,
       "id": 4
+    },
+    {
+      "name": "Monitor",
+      "brand": "Acer",
+      "price": 3423232,
+      "inStorage": 1,
+      "minStorage": 1,
+      "id": 5
+    },
+    {
+      "name": "Mouse",
+      "brand": "Logitech",
+      "price": 333333,
+      "inStorage": 2,
+      "minStorage": 1,
+      "id": 10
+    },
+    {
+      "name": "Notebook",
+      "brand": "Acer",
+      "price": 754,
+      "inStorage": 542,
+      "minStorage": 1,
+      "id": 12
+    },
+    {
+      "name": "Monitor",
+      "brand": "Samsung",
+      "price": 333,
+      "inStorage": 2,
+      "minStorage": 1,
+      "id": 17
+    },
+    {
+      "name": "Monitor",
+      "brand": "Acer",
+      "price": 6666,
+      "inStorage": 4,
+      "minStorage": 2,
+      "id": 18
+    },
+    {
+      "name": "Monitor",
+      "brand": "Acer",
+      "price": 9999,
+      "inStorage": 7,
+      "minStorage": 42,
+      "id": 19
+    },
+    {
+      "name": "Teclado",
+      "brand": "Logitech",
+      "price": 53432,
+      "inStorage": 1,
+      "minStorage": 1,
+      "id": 23
+    },
+    {
+      "name": "Mouse",
+      "brand": "Acer",
+      "price": 321,
+      "inStorage": 1,
+      "minStorage": 1,
+      "id": 24
+    },
+    {
+      "name": "Notebook",
+      "brand": "Acer",
+      "price": 3555,
+      "inStorage": 3,
+      "minStorage": 1,
+      "id": 26
     }
   ]
 }

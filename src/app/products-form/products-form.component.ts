@@ -17,6 +17,7 @@ export class ProductsFormComponent implements OnInit {
   submitted = false;
 
   productsList!: Products;
+  product?: Products[];
 
   constructor(
     private fb: FormBuilder,
@@ -26,26 +27,27 @@ export class ProductsFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.route.params
-    //   .pipe(
-    //     map((params: any) => params['id']),
-    //     switchMap((id) => this.service.loadByID(id))
-    //   )
-    //   .subscribe((product) => this.updateForm(product));
-
-    const product = this.route.snapshot.data['product'];
-
     this.formValue = this.fb.group({
-      name: [product.name],
-      brand: [product.brand],
-      price: [product.price],
-      inStorage: [product.inStorage],
-      minStorage: [
-        product.minStorage,
-        [Validators.required, Validators.min(1)],
-      ],
+      name:  ['',[Validators.required]],
+      brand: ['',[Validators.required]],
+      price: ['',[Validators.required]],
+      inStorage: ['',[Validators.required]],
+      minStorage: ['',[Validators.required]],
     });
+
+    // this.formValue = this.fb.group({
+    //   name: [product.name],
+    //   brand: [product.brand],
+    //   price: [product.price],
+    //   inStorage: [product.inStorage],
+    //   minStorage: [
+    //     product.minStorage,
+    //     [Validators.required, Validators.min(1)],
+    //   ],
+    // });
   }
+
+  
 
   // updateForm(product: any) {
   //   this.formValue.patchValue({
@@ -58,32 +60,29 @@ export class ProductsFormComponent implements OnInit {
   //   });
   // }
 
-  postProducts() {
-    this.productsList.name = this.formValue.value.name;
-    this.productsList.brand = this.formValue.value.brand;
-    this.productsList.price = this.formValue.value.price;
-    this.productsList.inStorage = this.formValue.value.inStorage;
-    this.productsList.minStorage = this.formValue.value.minStorage;
+  // postProducts() {
+  //   this.productsList.name = this.formValue.value.name;
+  //   this.productsList.brand = this.formValue.value.brand;
+  //   this.productsList.price = this.formValue.value.price;
+  //   this.productsList.inStorage = this.formValue.value.inStorage;
+  //   this.productsList.minStorage = this.formValue.value.minStorage;
 
-    this.service.postProducts(this.productsList).subscribe(() => {
-      this.formValue.reset();
-    });
-  }
+  //   this.service.postProducts(this.productsList).subscribe(() => {
+  //     this.formValue.reset();
+  //   });
+  // }
 
   onSubmit() {
     this.submitted = true;
     console.log(this.formValue.value);
-    if (this.formValue.valid) {
-      console.log('submit');
+    if (this.formValue.value.id == '') {
+      console.log('update');
       this.service.save(this.formValue.value);
       this.location.back();
-
-      if (this.formValue.value.id) {
-        // update
-        // this.service.save(this.formValue.value).subscribe(() => {
-        //   this.location.back();
-        // });
-      }
+    } else {
+      this.service.save(this.formValue.value);
+      this.service.list().subscribe((dados) => (this.product = dados));
+      this.location.back();
     }
 
       // } else {
