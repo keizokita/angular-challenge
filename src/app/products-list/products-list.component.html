@@ -18,7 +18,7 @@
       </a>
     </div>
   </div>
-  <div class="card-body">
+  <div id="AlertPlaceholder" class="card-body">
     <table class="table table-hover">
       <thead>
         <tr>
@@ -50,15 +50,14 @@
               {{ " " }}
               <button
                 class="btn btn-outline-success mb-1 btn-sm"
-                (click)="onVenda()"
+                (click)="onVenda(product.inStorage)"
               >
                 Vender
               </button>
               {{ " " }}
               <button
+                type="button"
                 class="btn btn-outline-danger mb-1 btn-sm"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
                 (click)="onDelete(product)"
               >
                 Remover
@@ -71,13 +70,14 @@
   </div>
 </div>
 
-<ng-template #deleteModal>
+<!-- <ng-template #deleteModal>
   <div
     class="modal fade"
     id="deleteModal"
     tabindex="-1"
-    aria-labelledby="exampleModalLabel"
+    aria-labelledby="deleteModalLabel"
     aria-hidden="true"
+    #deleteModal
   >
     <div class="modal-dialog">
       <div class="modal-content">
@@ -96,21 +96,42 @@
             type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
+            (click)="onDeclineDelete()"
           >
             Cancelar
           </button>
-          <button type="button" class="btn btn-primary">Confirmar</button>
+          <button 
+            type="button" 
+            class="btn btn-primary"
+            (click)="onConfirmDelete()"
+            >
+            Confirmar
+          </button>
         </div>
       </div>
     </div>
   </div>
-</ng-template>
+</ng-template> -->
 
-<script>
-  function showModal(){
-    const deleteModal= document.getElementById("deleteModal");
-    const myModal = new bootstrap.Modal(deleteModal);
-    
-    deleteModal.show();
-  }
-</script>
+<!-- <script>
+  const alertPlaceholder = document.getElementById('AlertPlaceholder')
+
+const alert = (message, type) => {
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>'
+  ].join('')
+
+  alertPlaceholder.append(wrapper)
+}
+
+const alertTrigger = document.getElementById('liveAlertBtn')
+if (alertTrigger) {
+  alertTrigger.addEventListener('click', () => {
+    alert('Produto excluido com sucesso!', 'success')
+  })
+}
+</script> -->

@@ -4,6 +4,11 @@ import { AuthService } from '../login/auth.service';
 import { ProductsService } from './products.service';
 import { Products } from './products';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Modal } from 'bootstrap';
+import { bootstrapApplication } from '@angular/platform-browser';
+import * as bootstrap from 'bootstrap';
+
+declare var window: any;
 
 @Component({
   selector: 'app-products-list',
@@ -21,9 +26,7 @@ export class ProductsListComponent implements OnInit {
 
   productSelected!: Products;
 
-  showModal: any;
-
-  deleteModalRef: any;
+  inStorage!: Products;
 
   @ViewChild('deleteModal') deleteModal: any;
   modalService: any;
@@ -50,21 +53,27 @@ export class ProductsListComponent implements OnInit {
   onDelete(product: any) {
     console.log('sucesso');
     this.productSelected = product;
-    //this.deleteModalRef = this.modalService.show(this.deleteModal, { class: '.modal-sm'});
+    // this.deleteModal = new window.bootstrap.Modal(document.getElementById('deleteModal'), {
+    // })
+    // this.deleteModal.show()
     this.service.remove(this.productSelected.id);
+    alert('Produto excluido com sucesso!')
     this.service.list().subscribe((dados) => (this.product = dados));
   }
-
+  
   // onConfirmDelete() {
-  //   this.service.remove(this.productSelected.id)
+  //   this.service.remove(this.productSelected.id);
+  //   this.service.list().subscribe((dados) => (this.product = dados));
   // }
 
   // onDeclineDelete() {
-  //   this.deleteModalRef.hide();
+  //   this.deleteModal.hide();
   // }
 
-  onVenda() {
-    function venda() {}
+  onVenda(inStorage: any) {
+    //buy (--inStorage) 
+    console.log(--inStorage)
+    return this.service.list().subscribe((dados) => (this.product = dados));
   }
 
   // loadByID(id: any) {
@@ -74,9 +83,13 @@ export class ProductsListComponent implements OnInit {
   //   )
   // }
 
-  showProduct(product: Products) {
-    if (this.formValue) {
-      this.formValue.reset();
-    }
-  }
+  // showProduct(product: Products) {
+  //   if (this.formValue) {
+  //     this.formValue.reset();
+  //   }
+  // }
 }
+function buy(inStorage: number) {
+  --inStorage
+}
+

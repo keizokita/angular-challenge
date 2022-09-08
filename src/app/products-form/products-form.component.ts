@@ -19,6 +19,12 @@ export class ProductsFormComponent implements OnInit {
   productsList!: Products;
   product?: Products[];
 
+  name = '';
+  brand = '';
+  price = '';
+  inStorage = '';
+  minStorage = '';
+
   constructor(
     private fb: FormBuilder,
     private service: ProductsService,
@@ -28,11 +34,20 @@ export class ProductsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.fb.group({
-      name:  ['',[Validators.required]],
-      brand: ['',[Validators.required]],
-      price: ['',[Validators.required]],
-      inStorage: ['',[Validators.required]],
-      minStorage: ['',[Validators.required]],
+      name: ['', [Validators.required]],
+      brand: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      inStorage: ['', [Validators.required]],
+      minStorage: ['', [Validators.required]],
+    });
+
+    this.route.params.subscribe((params: any) => {
+      const id = params.id;
+      // console.log('id',id);
+      this.service.loadByID(id).subscribe(product => {
+      this.formValue.patchValue(product);
+      // if (this.formValue == null) console.log('form nulo');
+      })
     });
 
     // this.formValue = this.fb.group({
@@ -47,15 +62,13 @@ export class ProductsFormComponent implements OnInit {
     // });
   }
 
-  
-
   // updateForm(product: any) {
   //   this.formValue.patchValue({
   //     id: product.id,
   //     name: product.name,
   //     brand: product.brand,
   //     price: product.price,
-  //     inStrorage: product.inStrorage,
+  //     inStorage: product.inStorage,
   //     minStorage: product.minStorage,
   //   });
   // }
@@ -84,12 +97,5 @@ export class ProductsFormComponent implements OnInit {
       this.service.list().subscribe((dados) => (this.product = dados));
       this.location.back();
     }
-
-      // } else {
-      //   this.service.create(this.formValue.value).subscribe(() => {
-      //     this.location.back();
-      //   });
-      //}
-      
   }
 }

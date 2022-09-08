@@ -7,6 +7,7 @@
     id="name" 
     formControlName="name" 
     required
+    [value]="name"
     />
     <label for="brand" class="form-label">Marca do Produto</label>
     <input
@@ -15,6 +16,7 @@
       id="brand"
       formControlName="brand"
       required
+      [value]="brand"
     />
     <label for="price" class="form-label">Preço do Produto</label>
     R$<input
@@ -23,6 +25,7 @@
       id="price"
       formControlName="price"
       required
+      [value]="price"
     />
     <label for="inStorage" class="form-label">Em estoque</label>
     <input
@@ -31,6 +34,7 @@
       id="inStorage"
       formControlName="inStorage"
       required
+      [value]="inStorage"
     />
     <label for="minStorage" class="form-label">Quantidade minima em estoque</label>
     <input

@@ -21,9 +21,7 @@ export class ProductsService {
   }
 
   loadByID(id: any) {
-    return this.http.get<Products>(`${this.API}/${id}`).subscribe(
-      a => console.log(a)
-      );
+    return this.http.get<Products>(`${this.API}/${id}`);
   }
 
   create(product: any) {
@@ -45,11 +43,15 @@ export class ProductsService {
     return this.create(product);
   }
 
-  remove(id: number) {
+  remove(id: any) {
     console.log(id);
     return this.http.delete(`${this.API}/${id}`).subscribe(
     a => console.log(a)
     );
+  }
+
+  buy(inStorage: any) {
+    this.http.get<Products[]>(this.API);
   }
 }
 
