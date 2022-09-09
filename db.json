@@ -7,6 +7,7 @@
       "inStorage": 0,
       "minStorage": 1,
       "id": 2
+<<<<<<< HEAD
     },
     {
       "name": "Notebook",
@@ -103,6 +104,8 @@
       "inStorage": 665433,
       "minStorage": 1,
       "id": 16
+=======
+>>>>>>> 8e0c52e15ed714c3bd80c7f57e9a18ae756d11fd
     }
   ]
 }
