@@ -17,9 +17,9 @@ const routes: Routes = [
     path: 'products-list/new',
     canActivate: [AuthGuard],
     component: ProductsFormComponent,
-    resolve: {
-      product: ProductsResolverGuard,
-    },
+    // resolve: {
+    //   product: ProductsResolverGuard,
+    // },
   },
   {
     path: 'products-list/edit/:id',

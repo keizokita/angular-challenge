@@ -1,12 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../login/auth.service';
 import { ProductsService } from './products.service';
 import { Products } from './products';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Modal } from 'bootstrap';
-import { bootstrapApplication } from '@angular/platform-browser';
-import * as bootstrap from 'bootstrap';
+import { FormControl, FormGroup } from '@angular/forms';
 
 declare var window: any;
 
@@ -24,19 +22,17 @@ export class ProductsListComponent implements OnInit {
 
   formValue!: FormGroup;
 
+  productList!: FormGroup;
+
   productSelected!: Products;
 
-  inStorage!: Products;
-
-  @ViewChild('deleteModal') deleteModal: any;
-  modalService: any;
+  inStorage!: Products[];
 
   constructor(
     private authService: AuthService,
     private service: ProductsService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute  ) {}
 
   ngOnInit() {
     this.authService.showMenuEmitter.subscribe(
@@ -53,11 +49,8 @@ export class ProductsListComponent implements OnInit {
   onDelete(product: any) {
     console.log('sucesso');
     this.productSelected = product;
-    // this.deleteModal = new window.bootstrap.Modal(document.getElementById('deleteModal'), {
-    // })
-    // this.deleteModal.show()
     this.service.remove(this.productSelected.id);
-    alert('Produto excluido com sucesso!')
+    alert('Produto excluido com sucesso!');
     this.service.list().subscribe((dados) => (this.product = dados));
   }
   
@@ -70,26 +63,22 @@ export class ProductsListComponent implements OnInit {
   //   this.deleteModal.hide();
   // }
 
-  onVenda(inStorage: any) {
-    //buy (--inStorage) 
-    console.log(--inStorage)
-    return this.service.list().subscribe((dados) => (this.product = dados));
+  onVenda(id: any) { 
+    // this.service.loadByID(id).subscribe((inStorage: any) => { // puxa o item por id
+    //   this.service.sell(--inStorage.inStorage)
+    //   console.log(inStorage)
+    // })
+    // this.service.list().subscribe((dados) => (this.product = dados)); // atualiza a lista com os dados atualizados
+    
+
+    this.service.loadByID(id).subscribe((produtoRetorando:any) => {
+      produtoRetorando.inStorage--;
+      this.service.update(produtoRetorando).subscribe(
+        () => this.service.list().subscribe((dados) => (this.product = dados))
+      )
+    })
+    alert('Produto vendido com sucesso!');
   }
 
-  // loadByID(id: any) {
-  //   this.service.loadByID(id)
-  //   .subscribe(
-  //     (product: Products) => this.showProduct(product),
-  //   )
-  // }
-
-  // showProduct(product: Products) {
-  //   if (this.formValue) {
-  //     this.formValue.reset();
-  //   }
-  // }
-}
-function buy(inStorage: number) {
-  --inStorage
-}
+} 
 

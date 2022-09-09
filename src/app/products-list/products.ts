@@ -1,4 +1,6 @@
 export interface Products {
+    value: any;
+    patchValue(arg0: number): unknown;
     id: number;
     name: string;
     brand: string;

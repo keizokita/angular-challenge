@@ -25,22 +25,19 @@ export class ProductsService {
   }
 
   create(product: any) {
-    return this.http.post(this.API, product).subscribe(
-      a => console.log(a)
-      );
+    return this.http.post(this.API, product).subscribe()
   }
 
   update(product: any) {
-    return this.http.put(`${this.API}/${product.id}`, product).subscribe(
-      b => console.log(b)
-    );
+    return this.http.put(`${this.API}/${product.id}`, product);
   }
 
   save(product: any) {
-    if (product.id) {
+    if (product.id == '') {
       return this.update(product);
+    } else {
+      return this.create(product);
     }
-    return this.create(product);
   }
 
   remove(id: any) {
@@ -50,8 +47,8 @@ export class ProductsService {
     );
   }
 
-  buy(inStorage: any) {
-    this.http.get<Products[]>(this.API);
-  }
+  // sell(id: any, product: any) {
+  //   this.http.put(`${this.API}/${id}`, produtoA);
+  // }
 }
 

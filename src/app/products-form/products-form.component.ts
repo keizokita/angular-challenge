@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Products } from '../products-list/products';
 import { ProductsService } from '../products-list/products.service';
 import { Location } from '@angular/common';
-import { map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-products-form',
@@ -43,23 +42,12 @@ export class ProductsFormComponent implements OnInit {
 
     this.route.params.subscribe((params: any) => {
       const id = params.id;
-      // console.log('id',id);
+      console.log('id',id);
       this.service.loadByID(id).subscribe(product => {
       this.formValue.patchValue(product);
       // if (this.formValue == null) console.log('form nulo');
       })
     });
-
-    // this.formValue = this.fb.group({
-    //   name: [product.name],
-    //   brand: [product.brand],
-    //   price: [product.price],
-    //   inStorage: [product.inStorage],
-    //   minStorage: [
-    //     product.minStorage,
-    //     [Validators.required, Validators.min(1)],
-    //   ],
-    // });
   }
 
   // updateForm(product: any) {
@@ -85,17 +73,24 @@ export class ProductsFormComponent implements OnInit {
   //   });
   // }
 
-  onSubmit() {
+  onSubmit() { // esta chamando a funcao loadById
     this.submitted = true;
     console.log(this.formValue.value);
-    if (this.formValue.value.id == '') {
+    if (this.formValue.valid)
+    console.log('submit')
+    // this.service.save(this.formValue.value);
+    // this.location.back()
+    // this.service.list().subscribe((dados) => (this.product = dados));
+    if (this.formValue.value.id) {
       console.log('update');
-      this.service.save(this.formValue.value);
-      this.location.back();
-    } else {
-      this.service.save(this.formValue.value);
-      this.service.list().subscribe((dados) => (this.product = dados));
-      this.location.back();
+      this.service.save(this.formValue.value)
+        this.location.back()
+      
+  
+    // } else {
+    //   this.service.update(this.formValue.value)
+    //   this.location.back()
+    //   this.service.list().subscribe((dados) => (this.product = dados));
     }
   }
 }

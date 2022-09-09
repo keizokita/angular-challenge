@@ -20,7 +20,7 @@
       "name": "Notebook",
       "brand": "Asus",
       "price": 22222,
-      "inStorage": 43,
+      "inStorage": 41,
       "minStorage": 1,
       "id": 4
     },
@@ -28,25 +28,81 @@
       "name": "Notebook",
       "brand": "Asus",
       "price": 4444,
-      "inStorage": 43,
+      "inStorage": 39,
       "minStorage": 1,
       "id": 5
+    },
+    {
+      "name": "Monitor",
+      "brand": "Asus",
+      "price": 7777,
+      "inStorage": 665,
+      "minStorage": 1,
+      "id": 7
+    },
+    {
+      "name": "Mouse",
+      "brand": "Logitech",
+      "price": 44444,
+      "inStorage": 3,
+      "minStorage": 1,
+      "id": 9
     },
     {
       "name": "Notebook",
       "brand": "Asus",
       "price": 666,
-      "inStorage": 43,
+      "inStorage": 42,
       "minStorage": 1,
-      "id": 6
+      "id": 10
     },
     {
       "name": "Notebook",
       "brand": "Asus",
-      "price": 454546,
+      "price": 99999999,
       "inStorage": 43,
       "minStorage": 1,
-      "id": 7
+      "id": 11
+    },
+    {
+      "name": "Notebook",
+      "brand": "Asus",
+      "price": 8888,
+      "inStorage": 43,
+      "minStorage": 1,
+      "id": 12
+    },
+    {
+      "name": "Teclado",
+      "brand": "Logitech",
+      "price": 5454544,
+      "inStorage": 444444,
+      "minStorage": 1,
+      "id": 13
+    },
+    {
+      "name": "Mouse",
+      "brand": "Logitech",
+      "price": 3333,
+      "inStorage": 2,
+      "minStorage": 1,
+      "id": 14
+    },
+    {
+      "name": "Monitor",
+      "brand": "Asus",
+      "price": 7777,
+      "inStorage": 665433,
+      "minStorage": 1,
+      "id": 15
+    },
+    {
+      "name": "Monitor",
+      "brand": "Asus",
+      "price": 99999,
+      "inStorage": 665433,
+      "minStorage": 1,
+      "id": 16
     }
   ]
 }
