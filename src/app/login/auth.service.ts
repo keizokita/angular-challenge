@@ -1,9 +1,7 @@
-import { Products } from '../products-list/products';
 import { Users } from './users';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import * as bootstrap from 'bootstrap';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',

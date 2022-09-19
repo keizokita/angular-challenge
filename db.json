@@ -1,28 +1,20 @@
 {
   "products": [
     {
-      "id": 17,
-      "name": "Processador",
-      "brand": "Intel",
-      "price": 399,
-      "inStorage": 0,
-      "minStorage": 1
-    },
-    {
-      "id": 20,
-      "name": "Monitor",
-      "brand": "Acer",
-      "price": 2000,
-      "inStorage": 3,
-      "minStorage": 3
-    },
-    {
-      "id": 23,
-      "name": "Notebook",
-      "brand": "Asus",
-      "price": 2000,
+      "id": 1,
+      "name": "Mouse",
+      "brand": "Logitech",
+      "price": 300,
       "inStorage": 2,
       "minStorage": 1
+    },
+    {
+      "id": 3,
+      "name": "Monitor",
+      "brand": "Acer",
+      "price": 1323,
+      "inStorage": 0,
+      "minStorage": 2
     }
   ]
 }

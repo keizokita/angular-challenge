@@ -1,9 +1,7 @@
-import { ToastrModule } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Users } from './users';
 import { AuthService } from './auth.service';
 import { Component, Input, OnInit } from '@angular/core';
-import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-login',
