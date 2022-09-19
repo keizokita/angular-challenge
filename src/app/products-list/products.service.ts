@@ -32,22 +32,15 @@ export class ProductsService {
   }
 
   save(product: any) {
-    if (product.id == '') {
-      return this.update(product);
+    if (product.id) {
+      return this.update(product).subscribe();
     } else {
       return this.create(product);
     }
   }
 
-  remove(id: any) {
-    console.log(id);
-    return this.http.delete(`${this.API}/${id}`).subscribe(
-    a => console.log(a)
-    );
+  remove(id: any) {;
+    return this.http.delete(`${this.API}/${id}`);
   }
-
-  // sell(id: any, product: any) {
-  //   this.http.put(`${this.API}/${id}`, produtoA);
-  // }
 }
 

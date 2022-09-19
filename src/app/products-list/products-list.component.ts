@@ -1,11 +1,11 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AuthService } from '../login/auth.service';
 import { ProductsService } from './products.service';
 import { Products } from './products';
-import { FormControl, FormGroup } from '@angular/forms';
-
-declare var window: any;
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products-list',
@@ -27,11 +27,23 @@ export class ProductsListComponent implements OnInit {
 
   inStorage!: Products[];
 
+  minStorage!: Products[];
+
+  deleteModalRef!: BsModalRef;
+
+  vendaModalRef!: BsModalRef;
+
+  idSelected!: Products;
+
   constructor(
     private authService: AuthService,
     private service: ProductsService,
     private router: Router,
-    private route: ActivatedRoute  ) {}
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private modalService: BsModalService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.authService.showMenuEmitter.subscribe(
@@ -43,41 +55,68 @@ export class ProductsListComponent implements OnInit {
 
   onEdit(id: any) {
     this.router.navigate(['edit', id], { relativeTo: this.route });
-  }
-
-  onDelete(product: any) {
-    console.log('sucesso');
-    this.productSelected = product;
-    this.service.remove(this.productSelected.id);
-    alert('Produto excluido com sucesso!');
     this.service.list().subscribe((dados) => (this.product = dados));
   }
-  
-  // onConfirmDelete() {
-  //   this.service.remove(this.productSelected.id);
-  //   this.service.list().subscribe((dados) => (this.product = dados));
-  // }
 
-  // onDeclineDelete() {
-  //   this.deleteModal.hide();
-  // }
-
-  onVenda(id: any) { 
-    // this.service.loadByID(id).subscribe((inStorage: any) => { // puxa o item por id
-    //   this.service.sell(--inStorage.inStorage)
-    //   console.log(inStorage)
-    // })
-    // this.service.list().subscribe((dados) => (this.product = dados)); // atualiza a lista com os dados atualizados
-    
-
-    this.service.loadByID(id).subscribe((produtoRetorando:any) => {
-      produtoRetorando.inStorage--;
-      this.service.update(produtoRetorando).subscribe(
-        () => this.service.list().subscribe((dados) => (this.product = dados))
-      )
-    })
-    alert('Produto vendido com sucesso!');
+  onDelete(deleteModal: TemplateRef<any>, product: any) {
+    this.openModal(deleteModal);
+    this.productSelected = product;
   }
 
-} 
+  openModal(deleteModal: TemplateRef<any>) {
+    this.deleteModalRef = this.modalService.show(deleteModal, {
+      class: 'modal-sm',
+    });
+  }
 
+  onConfirmDelete(product: any) {
+    this.service
+      .remove(this.productSelected.id)
+      .subscribe((success) => this.deleteModalRef.hide());
+    this.service.list().subscribe((dados) => (this.product = dados));
+  }
+
+  onDeclineDelete() {
+    this.deleteModalRef.hide();
+  }
+
+  onVenda(vendaModal: TemplateRef<any>, id: any) {
+    this.service.loadByID(id).subscribe((produtoRetornado: any) => {
+      if (produtoRetornado.inStorage == 0) {
+        this.openToast();
+      } else {
+        this.openVendaModal(vendaModal);
+        this.idSelected = id;
+      }
+    });
+  }
+
+  openVendaModal(vendaModal: TemplateRef<any>) {
+    this.vendaModalRef = this.modalService.show(vendaModal, {
+      class: 'modal-sm',
+    });
+  }
+
+  onConfirmVenda() {
+    this.service
+      .loadByID(this.idSelected)
+      .subscribe((produtoRetornado: any) => {
+        produtoRetornado.inStorage--;
+        this.service.update(produtoRetornado).subscribe(() => {
+          this.vendaModalRef.hide();
+        });
+        this.service.list().subscribe((dados) => (this.product = dados));
+      });
+  }
+
+  onDeclineVenda() {
+    this.vendaModalRef.hide();
+  }
+
+  openToast() {
+    this.toastr.error(
+      'Produto fora de estoque no momento.',
+      'Venda Impossivel!'
+    );
+  }
+}

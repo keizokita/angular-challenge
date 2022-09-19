@@ -1,111 +1,28 @@
 {
   "products": [
     {
-      "name": "Notebook",
-      "brand": "Positivo",
-      "price": 6000,
+      "id": 17,
+      "name": "Processador",
+      "brand": "Intel",
+      "price": 399,
       "inStorage": 0,
-      "minStorage": 1,
-      "id": 2
-<<<<<<< HEAD
+      "minStorage": 1
     },
     {
-      "name": "Notebook",
+      "id": 20,
+      "name": "Monitor",
       "brand": "Acer",
-      "price": 524332,
-      "inStorage": 1,
-      "minStorage": 1,
-      "id": 3
-    },
-    {
-      "name": "Notebook",
-      "brand": "Asus",
-      "price": 22222,
-      "inStorage": 41,
-      "minStorage": 1,
-      "id": 4
-    },
-    {
-      "name": "Notebook",
-      "brand": "Asus",
-      "price": 4444,
-      "inStorage": 39,
-      "minStorage": 1,
-      "id": 5
-    },
-    {
-      "name": "Monitor",
-      "brand": "Asus",
-      "price": 7777,
-      "inStorage": 665,
-      "minStorage": 1,
-      "id": 7
-    },
-    {
-      "name": "Mouse",
-      "brand": "Logitech",
-      "price": 44444,
+      "price": 2000,
       "inStorage": 3,
-      "minStorage": 1,
-      "id": 9
+      "minStorage": 3
     },
     {
+      "id": 23,
       "name": "Notebook",
       "brand": "Asus",
-      "price": 666,
-      "inStorage": 42,
-      "minStorage": 1,
-      "id": 10
-    },
-    {
-      "name": "Notebook",
-      "brand": "Asus",
-      "price": 99999999,
-      "inStorage": 43,
-      "minStorage": 1,
-      "id": 11
-    },
-    {
-      "name": "Notebook",
-      "brand": "Asus",
-      "price": 8888,
-      "inStorage": 43,
-      "minStorage": 1,
-      "id": 12
-    },
-    {
-      "name": "Teclado",
-      "brand": "Logitech",
-      "price": 5454544,
-      "inStorage": 444444,
-      "minStorage": 1,
-      "id": 13
-    },
-    {
-      "name": "Mouse",
-      "brand": "Logitech",
-      "price": 3333,
+      "price": 2000,
       "inStorage": 2,
-      "minStorage": 1,
-      "id": 14
-    },
-    {
-      "name": "Monitor",
-      "brand": "Asus",
-      "price": 7777,
-      "inStorage": 665433,
-      "minStorage": 1,
-      "id": 15
-    },
-    {
-      "name": "Monitor",
-      "brand": "Asus",
-      "price": 99999,
-      "inStorage": 665433,
-      "minStorage": 1,
-      "id": 16
-=======
->>>>>>> 8e0c52e15ed714c3bd80c7f57e9a18ae756d11fd
+      "minStorage": 1
     }
   ]
 }

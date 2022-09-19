@@ -1,18 +1,20 @@
 <form class="row g-3 needs-validation" novalidate [formGroup]="formValue">
   <div class="col-md-12">
     <label for="name" class="form-label">Produto</label>
-    <input 
-    type="text" 
-    class="form-control" 
-    id="name" 
-    formControlName="name" 
-    required
-<<<<<<< HEAD
-    [value]="name"
-=======
-    [(ngModel)]="name"
->>>>>>> 8e0c52e15ed714c3bd80c7f57e9a18ae756d11fd
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      formControlName="name"
+      required
+      [value]="name"
     />
+    <div
+      *ngIf="formValue.get('name')?.errors?.['required'] && formValue.get('name')?.touched "
+      class="invalid-feedback d-block"
+    >
+      Nome do Produto Obrigatório!
+    </div>
     <label for="brand" class="form-label">Marca do Produto</label>
     <input
       type="text"
@@ -20,12 +22,14 @@
       id="brand"
       formControlName="brand"
       required
-<<<<<<< HEAD
       [value]="brand"
-=======
-      [(ngModel)]="brand"
->>>>>>> 8e0c52e15ed714c3bd80c7f57e9a18ae756d11fd
     />
+    <div
+      *ngIf="formValue.get('brand')?.errors?.['required'] && formValue.get('brand')?.touched "
+      class="invalid-feedback d-block"
+    >
+      Marca do Produto Obrigatório!
+    </div>
     <label for="price" class="form-label">Preço do Produto</label>
     R$<input
       type="number"
@@ -33,12 +37,14 @@
       id="price"
       formControlName="price"
       required
-<<<<<<< HEAD
       [value]="price"
-=======
-      [(ngModel)]="price"
->>>>>>> 8e0c52e15ed714c3bd80c7f57e9a18ae756d11fd
     />
+    <div
+      *ngIf="formValue.get('price')?.errors?.['required'] && formValue.get('price')?.touched "
+      class="invalid-feedback d-block"
+    >
+      Preço do Produto Obrigatório!
+    </div>
     <label for="inStorage" class="form-label">Em estoque</label>
     <input
       type="number"
@@ -46,13 +52,17 @@
       id="inStorage"
       formControlName="inStorage"
       required
-<<<<<<< HEAD
       [value]="inStorage"
-=======
-      [(ngModel)]="inStrorage"
->>>>>>> 8e0c52e15ed714c3bd80c7f57e9a18ae756d11fd
     />
-    <label for="minStorage" class="form-label">Quantidade minima em estoque</label>
+    <div
+      *ngIf="formValue.get('inStorage')?.errors?.['required'] && formValue.get('inStorage')?.touched "
+      class="invalid-feedback d-block"
+    >
+      Quantidade do estoque Obrigatório!
+    </div>
+    <label for="minStorage" class="form-label"
+      >Quantidade minima em estoque</label
+    >
     <input
       type="number"
       class="form-control"
@@ -61,10 +71,19 @@
       required
       [(ngModel)]="minStorage"
     />
+    <div
+      *ngIf="formValue.get('minStorage')?.errors?.['required'] && formValue.get('minStorage')?.touched "
+      class="invalid-feedback d-block"
+    >
+      Quantidade mínima do estoque Obrigatório!
+    </div>
     <br />
     <div>
-      <button type="submit" class="btn btn-primary" (click)="onSubmit()" >
+      <button type="submit" class="btn btn-primary" [disabled]="!formValue.valid || !formValue.dirty" (click)="onSubmit()">
         Salvar
+      </button>
+      <button type="submit" class="btn btn-danger" (click)="onCancel()">
+        Cancelar
       </button>
     </div>
   </div>

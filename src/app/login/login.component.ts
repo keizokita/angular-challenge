@@ -1,6 +1,9 @@
+import { ToastrModule } from 'ngx-toastr';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Users } from './users';
 import { AuthService } from './auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +13,39 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
   users: Users = new Users();
 
-  constructor(private authService: AuthService) {}
+  form!: FormGroup;
 
-  ngOnInit(): void {}
+  @Input() showError?: boolean;
+  @Input() msgError?: string;
 
-  doLogin() {
+  constructor(private authService: AuthService, private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(20),
+        ],
+      ],
+    });
+  }
+
+  onSubmit() {
     this.authService.doLogin(this.users);
+  }
+
+  verifyValidTouched(campo: any) {
+    return !campo.valid && campo.touched;
+  }
+
+  aplyCssError(campo: any) {
+    return {
+      'is-invalid': this.verifyValidTouched(campo),
+      'has-feedback': this.verifyValidTouched(campo),
+    };
   }
 }

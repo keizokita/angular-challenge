@@ -3,8 +3,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, Resolve } from '@angular/router';
-import { ProductsResolverGuard } from './guards/products-resolve.guard';
+import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,9 +18,6 @@ const routes: Routes = [
     path: 'products-list/new',
     canActivate: [AuthGuard],
     component: ProductsFormComponent,
-    // resolve: {
-    //   product: ProductsResolverGuard,
-    // },
   },
   {
     path: 'products-list/edit/:id',
@@ -29,7 +27,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

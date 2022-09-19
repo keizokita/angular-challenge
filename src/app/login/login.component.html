@@ -1,27 +1,60 @@
 <h1>Login</h1>
-<form>
-  <div class="mb-3" >
-    <label class="form-label">Email</label>
-    <input
-      [(ngModel)]="users.email"
-      name="email"
-      id="email"
-      type="email"
-      class="form-control"
-    />
+<form [formGroup]="form" needs-validation (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        [(ngModel)]="users.email"
+        name="email"
+        id="email"
+        type="email"
+        class="form-control"
+        required
+        formControlName="email"
+        #email
+        aria-describedby="inputGroupPrepend"
+      />
+      <div
+        *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.touched "
+        class="invalid-feedback d-block"
+      >
+        Email Obrigatório!
+      </div>
+      <div
+        *ngIf="form.get('email')?.errors && form.get('email')?.touched"
+        class="invalid-feedback d-block"
+      >
+        Email Inválido!
+      </div>
+    </div>
   </div>
-  <div class="mb-3">
-    <label  class="form-label">Senha</label>
-    <input
-      [(ngModel)]="users.password"
-      name="password"
-      id="password"
-      type="password"
-      class="form-control"
-    />
+  <div class="form-group">
+    <div class="mb-3">
+      <label for="password" class="form-label">Senha</label>
+      <input
+        [(ngModel)]="users.password"
+        name="password"
+        id="password"
+        type="password"
+        class="form-control"
+        required
+        formControlName="password"
+        #password
+      />
+      <div
+        *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched "
+        class="invalid-feedback d-block"
+      >
+        Senha Inválida!
+      </div>
+      <div
+        *ngIf="form.get('password')?.errors && form.get('password')?.touched"
+        class="invalid-feedback d-block"
+      >
+        A senha deve conter no mínimo 6 caracteres!
+      </div>
+    </div>
   </div>
 
-  <button type="submit" class="btn btn-primary" (click)="doLogin()">
-    Enviar
-  </button>
+  <button type="submit" class="btn btn-primary" id="onSubmit" [disabled]="!form.valid">Enviar</button>
 </form>

@@ -32,7 +32,7 @@
       <tbody>
         <tr
           *ngFor="let product of product"
-          [class.table-danger]="product.inStorage == 0"
+          [class.table-danger]="product.inStorage <= product.minStorage"
         >
           <td>{{ product.name }}</td>
           <td>{{ product.brand }}</td>
@@ -50,7 +50,7 @@
               {{ " " }}
               <button
                 class="btn btn-outline-success mb-1 btn-sm"
-                (click)="onVenda(product.id)"
+                (click)="onVenda(vendaModal, product.id)"
               >
                 Vender
               </button>
@@ -58,7 +58,7 @@
               <button
                 type="button"
                 class="btn btn-outline-danger mb-1 btn-sm"
-                (click)="onDelete(product)"
+                (click)="onDelete(deleteModal, product)"
               >
                 Remover
               </button>
@@ -70,68 +70,30 @@
   </div>
 </div>
 
-<!-- <ng-template #deleteModal>
-  <div
-    class="modal fade"
-    id="deleteModal"
-    tabindex="-1"
-    aria-labelledby="deleteModalLabel"
-    aria-hidden="true"
-    #deleteModal
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Atenção!</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">Deseja realmente excluir esse produto?</div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-            (click)="onDeclineDelete()"
-          >
-            Cancelar
-          </button>
-          <button 
-            type="button" 
-            class="btn btn-primary"
-            (click)="onConfirmDelete()"
-            >
-            Confirmar
-          </button>
-        </div>
-      </div>
-    </div>
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja remover esse produto?</p>
+    <button
+      type="button"
+      class="btn btn-default"
+      (click)="onConfirmDelete(product)"
+    >
+      Sim
+    </button>
+    <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">
+      Não
+    </button>
   </div>
-</ng-template> -->
+</ng-template>
 
-<!-- <script>
-  const alertPlaceholder = document.getElementById('AlertPlaceholder')
-
-const alert = (message, type) => {
-  const wrapper = document.createElement('div')
-  wrapper.innerHTML = [
-    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-    `   <div>${message}</div>`,
-    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-    '</div>'
-  ].join('')
-
-  alertPlaceholder.append(wrapper)
-}
-
-const alertTrigger = document.getElementById('liveAlertBtn')
-if (alertTrigger) {
-  alertTrigger.addEventListener('click', () => {
-    alert('Produto excluido com sucesso!', 'success')
-  })
-}
-</script> -->
+<ng-template #vendaModal>
+  <div class="modal-body text-center" #product>
+    <p>Tem certeza que deseja vender esse produto?</p>
+    <button type="button" class="btn btn-default" (click)="onConfirmVenda()">
+      Sim
+    </button>
+    <button type="button" class="btn btn-primary" (click)="onDeclineVenda()">
+      Não
+    </button>
+  </div>
+</ng-template>
